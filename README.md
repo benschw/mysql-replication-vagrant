@@ -123,7 +123,8 @@ Import the export just taken from the master, configure the slave with:
 	mysql> SHOW SLAVE STATUS\G
 
 
-###
+### Verify Replication
+
 That's it! continue on to create a new table on the master node, insert a record, and see it show up on the slave.
 
 #### On Mysql Master
