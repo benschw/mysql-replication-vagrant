@@ -106,6 +106,8 @@ Import the export just taken from the master, configure the slave with:
 - The user created in puppet (`slave_user`)
 - And the bin log position info (`mysql-bin.000002` / `1467`)
 
+<!-- clear -->
+
 
 	vagrant ssh mysqlslave
 	
