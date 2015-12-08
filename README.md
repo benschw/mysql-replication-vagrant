@@ -113,7 +113,9 @@ Import the export just taken from the master, configure the slave with:
 	
 	$ mysql -u root -pchangeme demo < /vagrant/demo.sql
 	$ mysql -u root -pchangeme
-	mysql> CHANGE MASTER TO MASTER_HOST='172.10.10.10',MASTER_USER='slave_user', MASTER_PASSWORD='changeme', MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=1467;
+	mysql> CHANGE MASTER TO MASTER_HOST='172.10.10.10', \
+	  MASTER_USER='slave_user', MASTER_PASSWORD='changeme', \
+	  MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=1467;
 	Query OK, 0 rows affected (0.00 sec)
 	mysql> START SLAVE;
 	Query OK, 0 rows affected (0.00 sec)
