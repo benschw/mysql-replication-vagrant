@@ -1,8 +1,8 @@
 ## Mysql Master-Slave replication with Puppet
 To run the demo in vagrant, run
 
-	./deps.sh
-	vagrant up
+	./deps.sh   # clone the mysql puppet module
+	vagrant up  # provision the two nodes with vagrant
 
 to configure your `mysqlmaster` and `mysqlslave` nodes, then follow the steps below
 to get replication running between them.
