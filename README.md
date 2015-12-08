@@ -1,76 +1,15 @@
-### Usage
-
+## Mysql Master-Slave replication with Puppet
+To run the demo in vagrant, run
 
 	./deps.sh
 	vagrant up
+
+to configure your `mysqlmaster` and `mysqlslave` nodes, then follow the steps below
+to get replication running between them.
 	
 
-### Puppet profile for Mysql Master node
-
-	  class { 'mysql::server':
-		restart          => true,
-		root_password    => 'changeme',
-		override_options => {
-		  'mysqld' => {
-			'bind_address'                   => '0.0.0.0',
-			'server-id'                      => '1',
-			'binlog-format'                  => 'mixed',
-			'log-bin'                        => 'mysql-bin',
-			'datadir'                        => '/var/lib/mysql',
-			'innodb_flush_log_at_trx_commit' => '1',
-			'sync_binlog'                    => '1',
-			'binlog-do-db'                   => ['demo'],
-		  },
-		}
-	  }
-
-	  mysql_user { 'slave_user@%':
-		ensure        => 'present',
-		password_hash => mysql_password('changeme'),
-	  }
-
-	  mysql_grant { 'slave_user@%/*.*':
-		ensure     => 'present',
-		privileges => ['REPLICATION SLAVE'],
-		table      => '*.*',
-		user       => 'slave_user@%',
-	  }
-
-	  mysql::db { 'demo':
-		ensure   => 'present',
-		user     => 'demo',
-		password => 'changeme',
-		host     => '%',
-		grant    => ['all'],
-	  }
-
-### Puppet profile for Mysql Master node
-
-
-	  class { 'mysql::server':
-		restart          => true,
-		root_password    => 'changeme',
-		override_options => {
-		  'mysqld' => {
-			'bind_address' => '0.0.0.0',
-			'server-id'         => '2',
-			'binlog-format'     => 'mixed',
-			'log-bin'           => 'mysql-bin',
-			'relay-log'         => 'mysql-relay-bin',
-			'log-slave-updates' => '1',
-			'read-only'         => '1',
-			'replicate-do-db'   => ['demo'],
-		  },
-		}
-	  }
-
-	  mysql::db { 'demo':
-		ensure   => 'present',
-		user     => 'demo',
-		password => 'changeme',
-		host     => '%',
-		grant    => ['all'],
-	  }
+- [Puppet for `mysqlmaster`](https://github.com/benschw/mysql-replication-vagrant/blob/master/puppet/local-modules/mysqlprofile/manifests/mysqlmaster.pp)
+- [Puppet for `mysqlslave`](https://github.com/benschw/mysql-replication-vagrant/blob/master/puppet/local-modules/mysqlprofile/manifests/mysqlslave.pp)
 
 
 #### On Mysql Master
