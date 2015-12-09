@@ -19,9 +19,7 @@ Make sure database is locked down, take note of the bin log `File` and `Position
 
 	$ mysql -u root -pchangeme
 	mysql> SLAVE STOP;
-	Query OK, 0 rows affected (0.00 sec)
 	mysql> FLUSH TABLES WITH READ LOCK;
-	Query OK, 0 rows affected (0.00 sec)
 
 	mysql> SHOW MASTER STATUS;
 	+------------------+----------+--------------+------------------+
@@ -29,7 +27,6 @@ Make sure database is locked down, take note of the bin log `File` and `Position
 	+------------------+----------+--------------+------------------+
 	| mysql-bin.000002 |     1467 | demo         |                  |
 	+------------------+----------+--------------+------------------+
-	1 row in set (0.00 sec)
 
 	mysql> EXIT;
 
@@ -55,10 +52,7 @@ Import the export just taken from the master, configure the slave with:
 	mysql> CHANGE MASTER TO MASTER_HOST='172.10.10.10', \
 	  MASTER_USER='slave_user', MASTER_PASSWORD='changeme', \
 	  MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=1467;
-	Query OK, 0 rows affected (0.00 sec)
 	mysql> START SLAVE;
-	Query OK, 0 rows affected (0.00 sec)
-
 	mysql> SHOW SLAVE STATUS\G
 
 
@@ -89,6 +83,5 @@ That's it! continue on to create a new table on the master node, insert a record
 	+-------------+
 	| hello world |
 	+-------------+
-	1 row in set (0.00 sec)
 
 
