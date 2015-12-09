@@ -73,8 +73,8 @@ That's it! continue on to create a new table on the master node, insert a record
 	$ mysql -u root -pchangeme
 	
 	mysql USE demo;
-	mysql> CREATE TABLE IF NOT EXISTS demo ( msg VARCHAR(255) ) ENGINE=InnoDB;
-	mysql> INSERT INTO demo (`msg`) VALUES ('hello world');
+	mysql> CREATE TABLE IF NOT EXISTS Content ( msg VARCHAR(255) ) ENGINE=InnoDB;
+	mysql> INSERT INTO Content (`msg`) VALUES ('hello world');
 	
 	
 #### On Mysql Slave
@@ -83,7 +83,7 @@ That's it! continue on to create a new table on the master node, insert a record
 	
 	$ mysql -u root -pchangeme
 	mysql> USE demo;
-	mysql> SELECT * FROM demo;
+	mysql> SELECT * FROM Content;
 	+-------------+
 	| msg         |
 	+-------------+
